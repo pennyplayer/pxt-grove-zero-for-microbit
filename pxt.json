@@ -4,17 +4,22 @@
     "description": "The Grove Zero Bit Kit micro:Car extension for micro:bit",
     "license": "MIT",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "ws2018b": "github:Microsoft/pxt-ws2812b#v0.0.4"
     },
     "files": [
         "README.md",
         "main.ts",
         "driver.ts",
         "_locales/zh/pxt-grove-zero-for-microbit-jsdoc-strings.json",
-        "_locales/zh/pxt-grove-zero-for-microbit-strings.json"
+        "_locales/zh/pxt-grove-zero-for-microbit-strings.json",
+        "neopixel.ts",
+        "BitKit.ts"
     ],
     "testFiles": [
         "test.ts"
     ],
-    "public": true
+    "public": true,
+    "preferredEditor": "tsprj",
+    "installedVersion": "workspace:924e8d59-59b6-4b90-278c-f8bd1bee3c85"
 }
