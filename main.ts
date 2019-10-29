@@ -50,7 +50,7 @@ namespace grid {
     //% group="Grid"
     export function forward() {
         BitKit.setMotormoduleSpeed(255 - flcal, 255 - frcal);
-        basic.pause(2000); //2 seconds???
+        basic.pause(2700); //2 seconds???
         BitKit.setMotormoduleSpeed(0, 0);
     }
     /**
@@ -84,7 +84,7 @@ namespace grid {
     * eg. see red, show red, see blue, show blue
     */
     //% weight=96
-    //% block="on coral show red"
+    //% block="if your see coral"
     //% group="Grid"
     export function onAUVColour(handler: () => void) {
         let event = ColorEvent.R; //colour is red
@@ -92,6 +92,7 @@ namespace grid {
         control.onEvent(eventId, event, handler);
         //could try changing handler to show red? Neopixel, pin0 red??
     }
+
 
     /**
     * Calibration setup
@@ -147,82 +148,4 @@ namespace digger {
         music.playTone(988, 100);
     }
 }
-
-enum SensorType {
-    //% block=Sound Sensor
-    Sound = 6,
-    //% block=Gesture Sensor
-    Gesture = 0x0c,
-    //% block=Knob
-    Knob = 0x10,
-    //% block=Color Line Follower
-    Liner = 0x27
-
-};
-
-enum ColorEvent {
-    //% block=black
-    Black = 1,
-    //% block=red
-    R = 2,
-    //% block=green
-    G = 3,
-    //% block=blue
-    B = 4,
-    //% block=others
-    Other = 5
-};
-
-enum LinerEvent {
-    //% block=middle
-    Middle = 1,
-    //% block=left
-    Left = 3,
-    //% block=leftmost
-    Leftmost = 4,
-    //% block=right
-    Right = 5,
-    //% block=rightmost
-    Rightmost = 6,
-    //% block=lost
-    Lost = 2
-};
-
-enum MotorTpye {
-    //% block=servo
-    Servo = 0x24,
-    //% block=wheel
-    Wheel = 0x28
-};
-
-enum SpeedTpye {
-    //% block=slow
-    Slow = 120,
-    //% block=medium
-    Medium = 200,
-    //% block=fast
-    Fast = 255
-};
-
-enum DirectionTpye {
-    //% block=forward
-    Forward = 1,
-    //% block=backward
-    Backward = 2,
-    //% block=left
-    Left = 3,
-    //% block=right
-    Right = 4,
-    //% block=clockwise
-    Clockwise = 5,
-    //% block=counter-clockwise
-    Anticlockwise = 6
-};
-
-enum MotionTpye {
-    //% block="random direction"
-    Random = 0,
-    //% block=automatically
-    Auto = 1
-};
 
