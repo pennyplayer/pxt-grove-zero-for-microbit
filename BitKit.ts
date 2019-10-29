@@ -1,4 +1,81 @@
-// Add your code here
+enum SensorType {
+    //% block=Sound Sensor
+    Sound = 6,
+    //% block=Gesture Sensor
+    Gesture = 0x0c,
+    //% block=Knob
+    Knob = 0x10,
+    //% block=Color Line Follower
+    Liner = 0x27
+
+};
+
+enum ColorEvent {
+    //% block=black
+    Black = 1,
+    //% block=red
+    R = 2,
+    //% block=green
+    G = 3,
+    //% block=blue
+    B = 4,
+    //% block=others
+    Other = 5
+};
+
+enum LinerEvent {
+    //% block=middle
+    Middle = 1,
+    //% block=left
+    Left = 3,
+    //% block=leftmost
+    Leftmost = 4,
+    //% block=right
+    Right = 5,
+    //% block=rightmost
+    Rightmost = 6,
+    //% block=lost
+    Lost = 2
+};
+
+enum MotorTpye {
+    //% block=servo
+    Servo = 0x24,
+    //% block=wheel
+    Wheel = 0x28
+};
+
+enum SpeedTpye {
+    //% block=slow
+    Slow = 120,
+    //% block=medium
+    Medium = 200,
+    //% block=fast
+    Fast = 255
+};
+
+enum DirectionTpye {
+    //% block=forward
+    Forward = 1,
+    //% block=backward
+    Backward = 2,
+    //% block=left
+    Left = 3,
+    //% block=right
+    Right = 4,
+    //% block=clockwise
+    Clockwise = 5,
+    //% block=counter-clockwise
+    Anticlockwise = 6
+};
+
+enum MotionTpye {
+    //% block="random direction"
+    Random = 0,
+    //% block=automatically
+    Auto = 1
+};
+
 /**
  * Extension blocks
  */
