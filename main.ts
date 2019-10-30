@@ -1,3 +1,5 @@
+//Global variables
+
 /**
  * Calibration blocks
  */
@@ -41,6 +43,8 @@ namespace grid {
     let fcal = 1;
     let flcal = 0;
     let frcal = 0;
+    let strip: neopixel.Strip = null //make strip
+
     /**
     * Move the micro:car forwards for 5 seconds then measure and see how straight it goes
     * no input
@@ -50,7 +54,7 @@ namespace grid {
     //% group="Grid"
     export function forward() {
         BitKit.setMotormoduleSpeed(255 - flcal, 255 - frcal);
-        basic.pause(2700); //2 seconds???
+        basic.pause(2650); //needs to be different for each robot. Currently setup for Auto
         BitKit.setMotormoduleSpeed(0, 0);
     }
     /**
@@ -84,15 +88,48 @@ namespace grid {
     * eg. see red, show red, see blue, show blue
     */
     //% weight=96
-    //% block="if your see coral"
+    //% blockId=if_there_is_coral block="if there is coral, then show |%colour"
     //% group="Grid"
-    export function onAUVColour(handler: () => void) {
-        let event = ColorEvent.R; //colour is red
-        const eventId = driver.subscribeToEventSource(SensorType.Liner);
-        control.onEvent(eventId, event, handler);
-        //could try changing handler to show red? Neopixel, pin0 red??
+    export function IfThereIsCoral(colour: ColorEvent) {
+        for (let index = 0; index < 2; index++) {
+            if (BitKit.wasColorTriggered(colour)) {
+                if (colour==2) {
+                    strip.showColor(NeoPixelColors.Red)
+                }
+                else if (colour=3){
+                    strip.showColor(NeoPixelColors.Green)
+                }
+            }
+            basic.pause(250)
+        }
+        grid.clearRed()
+        basic.clearScreen()
     }
 
+    /**
+    * Show red
+    * mimic the colour of the ground under the bot.
+    * eg. see red, show red, see blue, show blue
+    */
+    //% weight=96
+    //% block="show red"
+    //% group="Grid"
+    export function showRed() {
+        strip.showColor(NeoPixelColors.Red)
+    }
+
+    /**
+    * Clear red
+    * mimic the colour of the ground under the bot.
+    * eg. see red, show red, see blue, show blue
+    */
+    //% weight=96
+    //% block="clear red"
+    //% group="Grid"
+    export function clearRed() {
+        strip.clear()
+        strip.show()
+    }
 
     /**
     * Calibration setup
@@ -102,6 +139,8 @@ namespace grid {
     //% block="setup f:|%fcal r:|%rcal"
     //% group="Setup"
     export function setup(forwardinput: number, rotationinput: number) {
+        strip = neopixel.create(DigitalPin.P1, 4, NeoPixelMode.RGB)
+
         rcal = rotationinput * 1; //dark magic
         if (forwardinput > 0) {
             flcal = forwardinput;
@@ -126,9 +165,11 @@ namespace digger {
     */
     //% weight=96
     //% block="EXPLODE"
-    //% group="funfun"
+    //% group="funfun"    
+    let strip: neopixel.Strip = null //make strip
+
     export function explode() {
-        let strip = neopixel.create(DigitalPin.P1, 4, NeoPixelMode.RGB)
+        strip = neopixel.create(DigitalPin.P1, 4, NeoPixelMode.RGB)
         let timer = 5
         for (let index = 0; index <= timer; index++) {
             led.plot(2, 2)
